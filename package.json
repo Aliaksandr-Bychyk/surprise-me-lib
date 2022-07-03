@@ -5,6 +5,9 @@
   "scripts": {
     "serve": "node server.js"
   },
+  "engines": {
+    "node": ">=0.12"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlexanderBychyk/surprise-me-lib.git"
@@ -15,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/AlexanderBychyk/surprise-me-lib/issues"
   },
-  "homepage": "https://github.com/AlexanderBychyk/surprise-me-lib#readme"
+  "homepage": "https://github.com/AlexanderBychyk/surprise-me-lib#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
