@@ -44,10 +44,29 @@ function Widget(config) {
     });
 
     modal.append(window);
+
+    window.append(firstPageModalContent(config));
+
     return modal;
   }
 
   function closeModal(modal) {
     modal.remove();
+  }
+
+  function firstPageModalContent({attributes, image}) {
+    let docFrag = document.createDocumentFragment();
+    let img = document.createElement('img');
+    let btn = document.createElement('button');
+
+    img.src = image;
+    img.className = 'modal-image';
+    
+    btn.textContent = 'Surprise me';
+    btn.className = 'modal-button'
+    
+    docFrag.append(img);
+    docFrag.append(btn);
+    return docFrag; 
   }
 }
