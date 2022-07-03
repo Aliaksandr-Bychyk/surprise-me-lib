@@ -1,0 +1,19 @@
+{
+  "name": "surprise-me-lib",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serve": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexanderBychyk/surprise-me-lib.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexanderBychyk/surprise-me-lib/issues"
+  },
+  "homepage": "https://github.com/AlexanderBychyk/surprise-me-lib#readme"
+}
