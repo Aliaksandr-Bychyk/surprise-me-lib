@@ -2,7 +2,7 @@ function Widget(config) {
   return {
     start() {
       appendStyles();
-      document.querySelector(config.placeholder).append(createButton(config));
+      document.querySelector(config.placeholder).append(createOpenModalButton(config));
     }
   }
 
@@ -13,7 +13,7 @@ function Widget(config) {
     document.head.append(stylesheet);
   }
   
-  function createButton({placeholder_text, placeholder_class = 'placeholder-button', placeholder_wrapper_class = 'placeholder-wrapper'}) {
+  function createOpenModalButton({placeholder_text, placeholder_class = 'placeholder-button', placeholder_wrapper_class = 'placeholder-wrapper'}) {
     let wrapper = document.createElement('div');
     let button = document.createElement('button');
 
@@ -57,19 +57,37 @@ function Widget(config) {
   function firstPageModalContent({attributes, image}, window) {
     let docFrag = document.createDocumentFragment();
     let img = document.createElement('img');
-    let btn = document.createElement('button');
 
     img.src = image;
     img.className = 'modal-image';
-    
-    btn.textContent = 'Surprise me';
-    btn.className = 'modal-button'
-    btn.addEventListener('click', () => loadingPageModalContent(attributes, window))
 
     docFrag.append(img);
-    docFrag.append(btn);
+    docFrag.append(modalButton('Surptise me', () => loadingPageModalContent(attributes, window)));
     return docFrag; 
   }
+  
+  function secondPageModalContent(element, window) {
+    window.innerHTML = '';
+    let heading = document.createElement('h1');
+
+    heading.textContent = `Your color is "${element}"!`;
+    heading.className = 'modal-heading';
+
+    window.append(heading);
+    window.append(modalButton('Select me', () => {
+      document.querySelector('.modal').remove();
+      config.select_attribute(element);
+    }));
+  }
+
+  function modalButton(text, func) {
+    let btn = document.createElement('button');
+    btn.textContent = text;
+    btn.className = 'modal-button'
+    btn.addEventListener('click', func)
+    return btn
+  } 
+
   function loadingPageModalContent(attributes, window) {
     window.innerHTML = '';
     
@@ -80,23 +98,5 @@ function Widget(config) {
     const SELECTED_ELEMENT = attributes[Math.floor(Math.random() * attributes.length)];
     const TIME = (Math.random(4 - 1) + 1).toFixed() * 1000;
     setTimeout(() => secondPageModalContent(SELECTED_ELEMENT, window), TIME);
-  }
-  function secondPageModalContent(element, window) {
-    window.innerHTML = '';
-    let heading = document.createElement('h1');
-    let btn = document.createElement('button');
-
-    heading.textContent = `Your color is "${element}"!`;
-    heading.className = 'modal-heading';
-    
-    btn.textContent = 'Select me';
-    btn.className = 'modal-button';
-    btn.addEventListener('click', () => {
-      document.querySelector('.modal').remove();
-      config.select_attribute(element);
-    })
-
-    window.append(heading);
-    window.append(btn);
   }
 }
