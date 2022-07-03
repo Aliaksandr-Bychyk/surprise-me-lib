@@ -77,8 +77,26 @@ function Widget(config) {
     loadingIcon.className = 'modal-loading-icon';
     
     window.append(loadingIcon);
-
+    const SELECTED_ELEMENT = attributes[Math.floor(Math.random() * attributes.length)];
     const TIME = (Math.random(4 - 1) + 1).toFixed() * 1000;
-    setTimeout(() => secondPageModalContent(), TIME);
+    setTimeout(() => secondPageModalContent(SELECTED_ELEMENT, window), TIME);
+  }
+  function secondPageModalContent(element, window) {
+    window.innerHTML = '';
+    let heading = document.createElement('h1');
+    let btn = document.createElement('button');
+
+    heading.textContent = `Your color is "${element}"!`;
+    heading.className = 'modal-heading';
+    
+    btn.textContent = 'Select me';
+    btn.className = 'modal-button';
+    btn.addEventListener('click', () => {
+      document.querySelector('.modal').remove();
+      config.select_attribute(element);
+    })
+
+    window.append(heading);
+    window.append(btn);
   }
 }
