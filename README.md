@@ -45,7 +45,10 @@ let configuration = {
 `select_attribute` - function that takes `attr` and should execute after the modal submitted;
 
 To run the library:
+
 ```
 let widget = Widget(configuration)
 widget.start()
 ```
+
+You can run a server by `npm run serve`. The server will be located at `localhost:3355`.
