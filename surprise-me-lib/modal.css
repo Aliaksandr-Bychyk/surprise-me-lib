@@ -51,3 +51,10 @@
 .modal-button {
   margin-bottom: 30px;
 }
+.modal-loading-icon {
+  background-image: url('./assets/loading.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 480px;
+  height: 480px;
+}

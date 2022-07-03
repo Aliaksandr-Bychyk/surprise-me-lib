@@ -45,7 +45,7 @@ function Widget(config) {
 
     modal.append(window);
 
-    window.append(firstPageModalContent(config));
+    window.append(firstPageModalContent(config, window));
 
     return modal;
   }
@@ -54,7 +54,7 @@ function Widget(config) {
     modal.remove();
   }
 
-  function firstPageModalContent({attributes, image}) {
+  function firstPageModalContent({attributes, image}, window) {
     let docFrag = document.createDocumentFragment();
     let img = document.createElement('img');
     let btn = document.createElement('button');
@@ -64,9 +64,21 @@ function Widget(config) {
     
     btn.textContent = 'Surprise me';
     btn.className = 'modal-button'
-    
+    btn.addEventListener('click', () => loadingPageModalContent(attributes, window))
+
     docFrag.append(img);
     docFrag.append(btn);
     return docFrag; 
+  }
+  function loadingPageModalContent(attributes, window) {
+    window.innerHTML = '';
+    
+    let loadingIcon = document.createElement('div');
+    loadingIcon.className = 'modal-loading-icon';
+    
+    window.append(loadingIcon);
+
+    const TIME = (Math.random(4 - 1) + 1).toFixed() * 1000;
+    setTimeout(() => secondPageModalContent(), TIME);
   }
 }
